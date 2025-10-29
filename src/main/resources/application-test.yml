@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: formulario-service-test
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test-formulariosdb
+      auto-index-creation: true
+
+server:
+  port: 8081
+
+logging:
+  level:
+    com.example.formulario_service: INFO
+    org.springframework.security: WARN
+    org.springframework.web: WARN
+
+app:
+  security:
+    enabled: false
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

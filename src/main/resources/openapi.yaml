@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: Formulario Dinámico API
+  description: Microservicio para el registro dinámico de formularios
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: http://localhost:8081/api
+    description: Servidor local
+  - url: https://api.example.com
+    description: Servidor de producción
+
+paths:
+  /formularios:
+    post:
+      summary: Registrar un nuevo formulario
+      tags:
+        - Formularios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormularioRequest'
+      responses:
+        '201':
+          description: Formulario registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormularioResponse'
+        '400':
+          description: Datos de entrada inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    get:
+      summary: Listar todos los formularios registrados
+      tags:
+        - Formularios
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - name: size
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Lista de formularios obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FormularioResponse'
+        '401':
+          description: No autorizado
+        '500':
+          description: Error interno del servidor
+
+components:
+  schemas:
+    FormularioRequest:
+      type: object
+      required:
+        - nombre
+        - apellido
+        - tipo_documento
+        - numero_documento
+        - celular
+        - correo
+        - tratamiento_datos
+      properties:
+        nombre:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: Juan
+        apellido:
+          type: string
+          minLength: 1
+          maxLength: 100
+          example: Pérez
+        tipo_documento:
+          type: string
+          enum: [DNI, CE, PASAPORTE]
+          example: DNI
+        numero_documento:
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: "12345678"
+        celular:
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: "+51987654321"
+        correo:
+          type: string
+          format: email
+          maxLength: 255
+          example: juan.perez@example.com
+        tratamiento_datos:
+          type: boolean
+          example: true
+        campos_adicionales:
+          type: object
+          additionalProperties: true
+          description: Campos adicionales dinámicos
+          example:
+            empresa: "Mi Empresa SA"
+            cargo: "Desarrollador"
+            pais: "Perú"
+
+    FormularioResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "507f1f77bcf86cd799439011"
+        nombre:
+          type: string
+        apellido:
+          type: string
+        tipo_documento:
+          type: string
+        numero_documento:
+          type: string
+        celular:
+          type: string
+        correo:
+          type: string
+        tratamiento_datos:
+          type: boolean
+        campos_adicionales:
+          type: object
+          additionalProperties: true
+        fecha_creacion:
+          type: string
+          format: date-time
+        fecha_actualizacion:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+        detalles:
+          type: array
+          items:
+            type: string
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
