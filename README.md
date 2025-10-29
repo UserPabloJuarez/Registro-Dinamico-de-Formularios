@@ -1,8 +1,10 @@
-📝 Formulario Service - Microservicio de Registro de Formularios
-📋 Descripción
+Formulario Service - Microservicio de Registro de Formularios
+
+Descripción
+
 Microservicio desarrollado con Spring Boot 3.4.1 y arquitectura reactiva para el registro dinámico de formularios. Incluye seguridad por API Key, documentación OpenAPI y contenerización con Docker.
 
-🚀 Características Principales
+Características Principales
 ✅ Arquitectura Reactiva (WebFlux + Reactive MongoDB)
 
 ✅ Seguridad por API Key configurable
@@ -17,7 +19,7 @@ Microservicio desarrollado con Spring Boot 3.4.1 y arquitectura reactiva para el
 
 ✅ Campos dinámicos adicionales
 
-🛠️ Requisitos Previos
+Requisitos Previos
 Opción 1: Con Docker (Recomendado)
 Docker 20.10+
 
@@ -30,7 +32,7 @@ Maven 3.9+
 
 MongoDB 6.0+
 
-🐳 Ejecución con Docker (Método Recomendado)
+Ejecución con Docker (Método Recomendado)
 1. Clonar y preparar el proyecto
 bash
 git clone <tu-repositorio>
