@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,7 @@ public class FormularioController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Listar formularios", description = "Obtiene la lista de formularios registrados (requiere API Key)")
+    @SecurityRequirement(name = "ApiKeyAuth")  // ← AGREGAR ESTA LÍNEA
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Lista de formularios obtenida exitosamente"),
             @ApiResponse(responseCode = "401", description = "No autorizado - API Key inválida"),

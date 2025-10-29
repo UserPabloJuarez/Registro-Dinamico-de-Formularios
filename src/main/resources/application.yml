@@ -8,16 +8,14 @@ spring:
 
 server:
   port: 8080
-  # NOTA: Eliminamos context-path para simplificar en Docker
 
 logging:
   level:
     com.example.formulario_service: INFO
-    org.springframework.web.reactive: INFO
 
 app:
   security:
-    api-key: "formulario-api-key-2024"
+    api-key: "formulario-api-key-2025"
     enabled: true
 
 springdoc:

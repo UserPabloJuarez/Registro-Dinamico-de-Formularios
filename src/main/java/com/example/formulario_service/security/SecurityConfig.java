@@ -13,7 +13,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "app.security.enabled", havingValue = "true")
-@Profile("!test") // No cargar en perfil de test
+@Profile("!test")
 public class SecurityConfig {
 
     private final ApiKeyAuthentication apiKeyAuthentication;
@@ -22,14 +22,11 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers("/formularios").authenticated()
-                        .pathMatchers("/formularios/**").authenticated()
-                        .pathMatchers("/swagger-ui.html", "/swagger-ui/**", "/api-docs/**").permitAll()
-                        .anyExchange().permitAll()
-                )
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+                .authorizeExchange(exchanges -> exchanges
+                        .anyExchange().permitAll()
+                )
                 .authenticationManager(apiKeyAuthentication)
                 .build();
     }

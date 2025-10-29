@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/formulariosdb
-      APP_SECURITY_API_KEY: "formulario-api-key-2024"
+      APP_SECURITY_API_KEY: "formulario-api-key-2025"
     depends_on:
       - mongo
     networks:
@@ -16,7 +16,7 @@ services:
   mongo:
     image: mongo:latest
     ports:
-      - "27017:27017"
+      - "27018:27017"  # ← CHANGED: External port 27018, internal 27017
     environment:
       MONGO_INITDB_DATABASE: formulariosdb
     volumes:
