@@ -5,19 +5,20 @@ Descripción
 Microservicio desarrollado con Spring Boot 3.4.1 y arquitectura reactiva para el registro dinámico de formularios. Incluye seguridad por API Key, documentación OpenAPI y contenerización con Docker.
 
 Características Principales
-✅ Arquitectura Reactiva (WebFlux + Reactive MongoDB)
 
-✅ Seguridad por API Key configurable
+- Arquitectura Reactiva (WebFlux + Reactive MongoDB)
 
-✅ Validación de datos robusta
+- Seguridad por API Key configurable
 
-✅ Documentación OpenAPI 3.0 (Swagger)
+- Validación de datos robusta
 
-✅ Contenerización con Docker Compose
+- Documentación OpenAPI 3.0 (Swagger)
 
-✅ Pruebas unitarias y de integración
+- Contenerización con Docker Compose
 
-✅ Campos dinámicos adicionales
+- Pruebas unitarias y de integración
+
+- Campos dinámicos adicionales
 
 Requisitos Previos
 Opción 1: Con Docker (Recomendado)
